@@ -1,0 +1,16 @@
+name: Continuous Integration
+
+on:
+  push:
+
+run-name: Test commit ${{ github.sha }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Elixir action
+        uses: mileschou/elixir-action@master
+        with:
+          args: mix test
