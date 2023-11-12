@@ -1,4 +1,4 @@
-defmodule TimecopsyncCrud.Projects.Project do
+defmodule TimecopsyncCrud.Projects.ProjectModel do
   use Ecto.Schema
   import Ecto.Changeset
 
