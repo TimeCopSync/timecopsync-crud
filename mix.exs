@@ -19,7 +19,7 @@ defmodule TimecopsyncCrud.MixProject do
   def application do
     [
       mod: {TimecopsyncCrud.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -35,6 +35,7 @@ defmodule TimecopsyncCrud.MixProject do
       {:phoenix, "~> 1.7.10"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},
+      {:ecto_psql_extras, "~> 0.6"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_dashboard, "~> 0.8.2"},
       {:telemetry_metrics, "~> 0.6"},
@@ -42,6 +43,7 @@ defmodule TimecopsyncCrud.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
+      {:mox, "~> 1.0", only: :test},
       {:plug_cowboy, "~> 2.5"}
     ]
   end
