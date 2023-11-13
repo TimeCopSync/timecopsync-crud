@@ -5,12 +5,26 @@ on:
 
 run-name: Test commit ${{ github.sha }}
 
+env:
+  MIX_ENV: test
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Elixir action
-        uses: mileschou/elixir-action@master
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
         with:
-          args: mix test
+          otp-version: 26.0.0
+          elixir-version: 1.15.0
+
+      - name: Elixir Test
+        run: |
+          mix deps.clean --all
+          mix clean
+          mix deps.get
+          mix compile
+          mix format --check-formatted
+          mix test
