@@ -6,12 +6,6 @@ services:
     environment:
       - POSTGRESQL_USERNAME=postgres
       - POSTGRESQL_PASSWORD=postgres
-      - POSTGRESQL_DATABASE=timecopsync_crud_dev
+      - POSTGRESQL_DATABASE=timecopsync_crud_test
     ports:
       - '5432:5432'
-    volumes:
-      - db_data:/bitnami/postgresql
-
-volumes:
-  db_data:
-    driver: local

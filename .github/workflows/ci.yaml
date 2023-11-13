@@ -14,6 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: "./docker/docker-compose.yml"
+          down-flags: "--volumes"
+
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
