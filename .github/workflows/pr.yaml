@@ -45,17 +45,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: "./docker/docker-compose.yml"
+          down-flags: "--volumes"
+
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
           otp-version: 26.0.0
           elixir-version: 1.15.0
 
-      - name: Elixir Test
+      - name: Elixir Setup
         run: |
           mix deps.clean --all
           mix clean
           mix deps.get
           mix compile
+
+      - name: Elixir Test
+        run: |
           mix format --check-formatted
           mix test
