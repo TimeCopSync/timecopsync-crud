@@ -33,3 +33,15 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
+
+config :timecopsync_crud, :phoenix_swagger,
+  swagger_files: %{
+    "priv/static/swagger.json" => [
+      # phoenix routes will be converted to swagger paths
+      router: TimecopsyncCrudWeb.Router,
+      # (optional) endpoint config used to set host, port and https schemes.
+      endpoint: TimecopsyncCrudWeb.Endpoint
+    ]
+  }
+
+config :phoenix_swagger, json_library: Jason

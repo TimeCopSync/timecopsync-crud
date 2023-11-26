@@ -9,6 +9,33 @@ defmodule TimecopsyncCrudWeb.Router do
     pipe_through :api
   end
 
+  scope "/api/swagger" do
+    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :timecopsync_crud, swagger_file: "swagger.json"
+  end
+
+  def swagger_info do
+    %{
+      basePath: "/api",
+      openapi: "3.1.0",
+      schemes: ["https", "http"],
+      info: %{
+        title: "TimeCop Sync CRUD API",
+        summary: "API that operates CRUD operations on projects and timer entries",
+        description: "API that operates CRUD operations on projects and timer entries",
+        contact: %{
+          name: "Yann POMIE",
+          email: "yann.pomie@laposte.net",
+          url: "https://yann-pomie.fr"
+        },
+        license: %{
+          name: "MIT",
+          url: "https://github.com/TimeCopSync/timecopsync-crud/blob/main/LICENSE"
+        },
+        version: "1.0",
+      }
+    }
+  end
+
   # Enable LiveDashboard in development
   if Application.compile_env(:timecopsync_crud, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
