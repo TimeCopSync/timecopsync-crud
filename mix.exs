@@ -9,7 +9,8 @@ defmodule TimecopsyncCrud.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      compilers: Mix.compilers() ++ [:phoenix_swagger]
     ]
   end
 
@@ -44,7 +45,9 @@ defmodule TimecopsyncCrud.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:mox, "~> 1.0", only: :test},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:ex_json_schema, "~> 0.10.2"},
+      {:phoenix_swagger, "~> 0.8"}
     ]
   end
 
