@@ -2,43 +2,48 @@ defmodule TimecopsyncCrud.Projects do
   alias TimecopsyncCrud.Projects.ProjectModel
   alias TimecopsyncCrud.Repo
   import Ecto.Query
+  require Logger
 
   def get_project(id) do
-    Repo.get(Project, id)
+    case Repo.get(ProjectModel, id) do
+      p when p != nil -> {:ok, p}
+      _ -> {:error, :not_found}
+    end
+  end
+
+  def get_project!(id) do
+    Repo.get!(Project, id)
   end
 
   def remove_project!(id) do
-    Repo.delete!(get_project(id))
+    Repo.delete!(get_project!(id))
   end
 
-  def get_projects(limit \\ nil, show_archived \\ false) do
+  def remove_project(%ProjectModel{} = project) do
+    Repo.delete(project)
+  end
+
+  def get_projects(query_opts \\ %{}) do
     Repo.all(
       from p in ProjectModel,
         order_by: [asc: p.name],
         # Because we show unarchived, always
-        where: p.archived == ^show_archived and p.archived == false,
-        limit: ^limit
+        where: p.archived == false or p.archived == ^Map.get(query_opts, "show_archived", false),
+        limit: ^Map.get(query_opts, "limit", 100)
     )
   end
 
-  def create_project!(name, colour, archived \\ false) do
-    Repo.insert(%ProjectModel{
-      id: Ecto.UUID.generate(),
-      name: name,
-      colour: colour,
-      archived: archived
-    })
+  def create_project(attrs \\ %{}) do
+    %ProjectModel{
+      id: Ecto.UUID.generate()
+    }
+    |> ProjectModel.changeset(attrs)
+    |> Repo.insert()
   end
 
-  def archive_project!(id, archived \\ true) do
-    Repo.update!(ProjectModel.changeset(get_project(id), %{archived: archived}))
-  end
-
-  def set_project_colour!(id, colour) do
-    Repo.update!(ProjectModel.changeset(get_project(id), %{colour: colour}))
-  end
-
-  def set_project_name!(id, name) do
-    Repo.update!(ProjectModel.changeset(get_project(id), %{name: name}))
+  def update_project(%ProjectModel{} = project, attrs) do
+    project
+    |> ProjectModel.changeset(attrs)
+    |> Repo.update()
   end
 end
