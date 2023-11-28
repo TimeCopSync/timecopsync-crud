@@ -57,6 +57,20 @@ defmodule TimecopsyncCrudWeb do
     end
   end
 
+  def view do
+    quote do
+      use Phoenix.View,
+        root: "lib/timecopsync_crud_web/templates",
+        namespace: TimecopsyncCrudWeb
+
+      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+
+      import TimecopsyncCrudWeb.Router.Helpers
+      import TimecopsyncCrudWeb.ErrorHelpers
+      import TimecopsyncCrudWeb.Gettext
+    end
+  end
+
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """

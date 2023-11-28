@@ -7,10 +7,14 @@ defmodule TimecopsyncCrudWeb.Router do
 
   scope "/api", TimecopsyncCrudWeb do
     pipe_through :api
+
+    resources "/projects", ProjectController, except: [:new, :edit]
   end
 
   scope "/api/swagger" do
-    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :timecopsync_crud, swagger_file: "swagger.json"
+    forward "/", PhoenixSwagger.Plug.SwaggerUI,
+      otp_app: :timecopsync_crud,
+      swagger_file: "swagger.json"
   end
 
   def swagger_info do
@@ -31,7 +35,7 @@ defmodule TimecopsyncCrudWeb.Router do
           name: "MIT",
           url: "https://github.com/TimeCopSync/timecopsync-crud/blob/main/LICENSE"
         },
-        version: "1.0",
+        version: "1.0"
       }
     }
   end
