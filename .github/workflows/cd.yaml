@@ -33,7 +33,7 @@ jobs:
     needs: gen-release
     steps:
       - id: no-v
-        uses: actions/github-script@v3
+        uses: actions/github-script@v7
         with:
           script: |
             const tag = '${{ github.ref }}';
