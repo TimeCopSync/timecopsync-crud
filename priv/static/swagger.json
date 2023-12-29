@@ -3,7 +3,6 @@
     "version": "1.0",
     "description": "API that operates CRUD operations on projects and timer entries",
     "title": "TimeCop Sync CRUD API",
-    "summary": "API that operates CRUD operations on projects and timer entries",
     "contact": {
       "name": "Yann POMIE",
       "url": "https://yann-pomie.fr",
@@ -12,16 +11,17 @@
     "license": {
       "name": "MIT",
       "url": "https://github.com/TimeCopSync/timecopsync-crud/blob/main/LICENSE"
-    }
+    },
+    "summary": "API that operates CRUD operations on projects and timer entries"
   },
   "host": "localhost:4000",
   "definitions": {},
-  "paths": {},
-  "swagger": "2.0",
   "schemes": [
     "https",
     "http"
   ],
+  "paths": {},
+  "swagger": "2.0",
   "basePath": "/api",
   "openapi": "3.1.0"
 }
