@@ -20,7 +20,7 @@ jobs:
     if: github.actor != 'dependabot[bot]'
     steps:
       - name: Add PR Comment
-        uses: actions/first-interaction@v1.2.0
+        uses: actions/first-interaction@v1.3.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           pr-message: |
