@@ -46,4 +46,93 @@ defmodule TimecopsyncCrud.Projects do
     |> ProjectModel.changeset(attrs)
     |> Repo.update()
   end
+
+  alias TimecopsyncCrud.Projects.Timer
+
+  @doc """
+  Returns the list of timers.
+
+  ## Examples
+
+      iex> list_timers()
+      [%Timer{}, ...]
+
+  """
+  def list_timers do
+    raise "TODO"
+  end
+
+  @doc """
+  Gets a single timer.
+
+  Raises if the Timer does not exist.
+
+  ## Examples
+
+      iex> get_timer!(123)
+      %Timer{}
+
+  """
+  def get_timer!(id), do: raise "TODO"
+
+  @doc """
+  Creates a timer.
+
+  ## Examples
+
+      iex> create_timer(%{field: value})
+      {:ok, %Timer{}}
+
+      iex> create_timer(%{field: bad_value})
+      {:error, ...}
+
+  """
+  def create_timer(attrs \\ %{}) do
+    raise "TODO"
+  end
+
+  @doc """
+  Updates a timer.
+
+  ## Examples
+
+      iex> update_timer(timer, %{field: new_value})
+      {:ok, %Timer{}}
+
+      iex> update_timer(timer, %{field: bad_value})
+      {:error, ...}
+
+  """
+  def update_timer(%Timer{} = timer, attrs) do
+    raise "TODO"
+  end
+
+  @doc """
+  Deletes a Timer.
+
+  ## Examples
+
+      iex> delete_timer(timer)
+      {:ok, %Timer{}}
+
+      iex> delete_timer(timer)
+      {:error, ...}
+
+  """
+  def delete_timer(%Timer{} = timer) do
+    raise "TODO"
+  end
+
+  @doc """
+  Returns a data structure for tracking timer changes.
+
+  ## Examples
+
+      iex> change_timer(timer)
+      %Todo{...}
+
+  """
+  def change_timer(%Timer{} = timer, _attrs \\ %{}) do
+    raise "TODO"
+  end
 end
