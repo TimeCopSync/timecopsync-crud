@@ -1,5 +1,7 @@
 defmodule TimecopsyncCrud.Projects do
   alias TimecopsyncCrud.Projects.ProjectModel
+  alias TimecopsyncCrud.Projects.Timer
+
   alias TimecopsyncCrud.Repo
   import Ecto.Query
   require Logger
@@ -47,8 +49,6 @@ defmodule TimecopsyncCrud.Projects do
     |> Repo.update()
   end
 
-  alias TimecopsyncCrud.Projects.Timer
-
   @doc """
   Returns the list of timers.
 
@@ -59,7 +59,11 @@ defmodule TimecopsyncCrud.Projects do
 
   """
   def list_timers do
-    raise "TODO"
+    Repo.all(
+      from t in Timer,
+        order_by: [desc: t.start_time, desc: t.end_time],
+        limit: 100
+    )
   end
 
   @doc """
@@ -73,7 +77,25 @@ defmodule TimecopsyncCrud.Projects do
       %Timer{}
 
   """
-  def get_timer!(id), do: raise "TODO"
+  def get_timer!(id), do: Repo.get!(Timer, id)
+
+  @doc """
+  Gets a single timer.
+
+  returns {:ok, timer} or {:error, :not_found}
+
+  ## Examples
+
+      iex> get_timer(123)
+      {:ok, %Timer{}}
+
+  """
+  def get_timer(id) do
+    case Repo.get(Timer, id) do
+      t when t != nil -> {:ok, t}
+      _ -> {:error, :not_found}
+    end
+  end
 
   @doc """
   Creates a timer.
@@ -88,7 +110,11 @@ defmodule TimecopsyncCrud.Projects do
 
   """
   def create_timer(attrs \\ %{}) do
-    raise "TODO"
+    %Timer{
+      id: Ecto.UUID.generate()
+    }
+    |> Timer.changeset(attrs)
+    |> Repo.insert()
   end
 
   @doc """
@@ -104,7 +130,7 @@ defmodule TimecopsyncCrud.Projects do
 
   """
   def update_timer(%Timer{} = timer, attrs) do
-    raise "TODO"
+    Timer.changeset(timer, attrs) |> Repo.update()
   end
 
   @doc """
@@ -120,7 +146,7 @@ defmodule TimecopsyncCrud.Projects do
 
   """
   def delete_timer(%Timer{} = timer) do
-    raise "TODO"
+    Repo.delete(timer)
   end
 
   @doc """
@@ -132,7 +158,9 @@ defmodule TimecopsyncCrud.Projects do
       %Todo{...}
 
   """
-  def change_timer(%Timer{} = timer, _attrs \\ %{}) do
-    raise "TODO"
+  def change_timer(%Timer{} = timer, attrs \\ %{}) do
+    timer
+    |> ProjectModel.changeset(attrs)
+    |> Repo.update()
   end
 end

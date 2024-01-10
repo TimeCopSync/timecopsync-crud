@@ -10,9 +10,7 @@ defmodule TimecopsyncCrud.ProjectsFixtures do
   def timer_fixture(attrs \\ %{}) do
     {:ok, timer} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> TimecopsyncCrud.Projects.create_timer()
 
     timer

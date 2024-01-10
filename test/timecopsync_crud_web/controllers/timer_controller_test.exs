@@ -5,12 +5,8 @@ defmodule TimecopsyncCrudWeb.TimerControllerTest do
 
   alias TimecopsyncCrud.Projects.Timer
 
-  @create_attrs %{
-
-  }
-  @update_attrs %{
-
-  }
+  @create_attrs %{}
+  @update_attrs %{}
   @invalid_attrs %{}
 
   setup %{conn: conn} do

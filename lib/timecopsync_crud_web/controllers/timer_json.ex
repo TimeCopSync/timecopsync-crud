@@ -5,7 +5,10 @@ defmodule TimecopsyncCrudWeb.TimerJSON do
   Renders a list of timers.
   """
   def index(%{timers: timers}) do
-    %{data: for(timer <- timers, do: data(timer))}
+    %{
+      meta: %{total: length(timers)},
+      data: for(timer <- timers, do: data(timer))
+    }
   end
 
   @doc """
@@ -17,7 +20,12 @@ defmodule TimecopsyncCrudWeb.TimerJSON do
 
   defp data(%Timer{} = timer) do
     %{
-      id: timer.id
+      id: timer.id,
+      description: timer.description,
+      start_time: timer.start_time,
+      end_time: timer.end_time,
+      notes: timer.notes,
+      project_id: timer.project_id
     }
   end
 end
