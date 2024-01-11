@@ -9,6 +9,7 @@ defmodule TimecopsyncCrudWeb.Router do
     pipe_through :api
 
     resources "/projects", ProjectController, except: [:new, :edit]
+    resources "/timers", TimerController, except: [:new, :edit]
   end
 
   scope "/api/swagger" do
